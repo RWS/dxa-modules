@@ -15,6 +15,7 @@
     <Mapping exportContext="/100%20Master/Building%20Blocks/Modules" exportTitle="Search" importContext="" importTitle="" />
     <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search" exportTitle="Admin" importContext="" importTitle="" />
     <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search" exportTitle="Developer" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search/Developer" exportTitle="Search%20Template%20Building%20Blocks" importContext="" importTitle="" />
     <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search" exportTitle="Editor" importContext="" importTitle="" />
     <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search/Editor" exportTitle="Schemas" importContext="" importTitle="" />
     <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search/Editor" exportTitle="Templates" importContext="" importTitle="" />
@@ -31,6 +32,7 @@
     <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules" exportTitle="Search" importContext="" importTitle="" />
     <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search" exportTitle="Admin" importContext="" importTitle="" />
     <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search" exportTitle="Developer" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search/Developer" exportTitle="Search%20Template%20Building%20Blocks" importContext="" importTitle="" />
     <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search" exportTitle="Editor" importContext="" importTitle="" />
     <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search/Editor" exportTitle="Schemas" importContext="" importTitle="" />
     <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search/Editor" exportTitle="Templates" importContext="" importTitle="" />
@@ -50,6 +52,7 @@
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules" exportTitle="Search" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search" exportTitle="Admin" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search" exportTitle="Developer" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search/Developer" exportTitle="Search%20Template%20Building%20Blocks" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search" exportTitle="Editor" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search/Editor" exportTitle="Schemas" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search/Editor" exportTitle="Templates" importContext="" importTitle="" />
@@ -64,15 +67,19 @@
     <Mapping exportContext="/400%20Example%20Site" exportTitle="Home" importContext="" importTitle="" />
   </ItemSet>
   <ItemSet role="Schema">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Component%20Template%20Metadata.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Schemas" exportTitle="Module%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search/Editor/Schemas" exportTitle="Search%20Indexing%20Metadata.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search/Editor/Schemas" exportTitle="Search%20Query.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search/Site%20Manager/Schemas" exportTitle="Search%20Box.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/100%20Master/Building%20Blocks/Modules/Search/Site%20Manager/Schemas" exportTitle="Search%20Configuration.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search/Editor/Schemas" exportTitle="Search%20Indexing%20Metadata.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search/Editor/Schemas" exportTitle="Search%20Query.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search/Site%20Manager/Schemas" exportTitle="Search%20Box.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/200%20Example%20Content/Building%20Blocks/Modules/Search/Site%20Manager/Schemas" exportTitle="Search%20Configuration.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Schemas/Page%20Schemas" exportTitle="Content%20Page.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Schemas/Region%20Schemas" exportTitle="%5BMain%5D%20Region.xsd" importContext="" importTitle="" />
+    <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search/Editor/Schemas" exportTitle="Search%20Indexing%20Metadata.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search/Editor/Schemas" exportTitle="Search%20Query.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search/Site%20Manager/Schemas" exportTitle="Search%20Box.xsd" importContext="" importTitle="" />
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Search/Site%20Manager/Schemas" exportTitle="Search%20Configuration.xsd" importContext="" importTitle="" />
@@ -106,5 +113,7 @@
     <Mapping exportContext="/400%20Example%20Site/Building%20Blocks/Modules/Core/Editor/Templates" exportTitle="Content%20Page%20Without%20Navigation.tptcmp" importContext="" importTitle="" />
   </ItemSet>
   <ItemSet role="TemplateBuildingBlock">
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Default%20Component%20Template%20Finish%20Actions.tbbcmp" importContext="" importTitle="" />
+    <Mapping exportContext="/100%20Master/Building%20Blocks/Framework/Developer/Templates/DXA%2ER2" exportTitle="Render%20Component%20Content.tbbcmp" importContext="" importTitle="" />
   </ItemSet>
 </Mappings>

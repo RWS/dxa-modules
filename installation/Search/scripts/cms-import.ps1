@@ -40,7 +40,7 @@ param (
 
 	# By default, the SI4T based package module will be imported
 	[ValidateSet("SI4TSearch", "SitesSearch")]
-    [string]$cmsPackageImportSearchType = "SI4TSearch"
+    [string]$cmsPackageImportSearchType = "SI4TSearch",
 
     # By default, the current Windows user's credentials are used, but it is possible to specify alternative credentials:
     [Parameter(Mandatory=$false, HelpMessage="CMS User name")]
@@ -94,7 +94,7 @@ if ($importType -ne "permissions-only")
     $siteTypeRootFolderWebDavUrl = Encode-WebDav "$siteTypePublication/$rootFolder"
     $siteTypeRootSgWebDavUrl = Encode-WebDav "$siteTypePublication/$rootStructureGroup"
 
-    if(cmsPackageImportSearchType -ne "SI4TSearch")
+    if($cmsPackageImportSearchType -ne "SI4TSearch")
 	{
 		$cmsVersion = "sites10"
 		Import-CmPackage $importPackageFullPath $tempFolder $detailedMapping $cmsVersion
@@ -120,7 +120,7 @@ if ($importType -ne "permissions-only")
             -regionName "Nav"
     }
   
-	if(cmsPackageImportSearchType -ne "SitesSearch")
+	if($cmsPackageImportSearchType -ne "SitesSearch")
 	{
 		Add-TemplateToCompound `
 			"$masterRootFolderWebDavUrl/Modules/Search/Developer/Search Template Building Blocks/Enable Search Indexing.tbbcmp" `

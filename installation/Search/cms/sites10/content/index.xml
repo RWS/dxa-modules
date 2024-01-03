@@ -9,7 +9,14 @@
         <Item id="e43df6792c6642b0878b189068129486" title="Framework" itemType="Folder" selected="false" exported="false">
           <Item id="fbf20f4821514dd2b594576ba785b2ca" title="Developer" itemType="Folder" selected="false" exported="false">
             <Item id="dc45143da6d54d1aa31ca39813e51296" title="Schemas" itemType="Folder" selected="false" exported="false">
+              <Item id="tcm:2-91-8" title="Component%20Template%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="false" exported="true" />
               <Item id="428db8f07c8947718ebc39565b88a60d" title="Module%20Configuration" extension="xsd" itemType="Schema" selected="false" exported="false" />
+            </Item>
+            <Item id="9c1bc66f66b94d2b95f906bd7eb4810d" title="Templates" itemType="Folder" selected="false" exported="false">
+              <Item id="b1557973c98d44afb540d77d146e5f3c" title="DXA%2ER2" itemType="Folder" selected="false" exported="false">
+                <Item id="3e89855bccb5427a8626feca503e3a4f" title="Default%20Component%20Template%20Finish%20Actions" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+                <Item id="f4a1c0b41b8a41d991e3d8fc9dd7180c" title="Render%20Component%20Content" extension="tbbcmp" itemType="TemplateBuildingBlock" selected="false" exported="false" />
+              </Item>
             </Item>
           </Item>
         </Item>
@@ -20,6 +27,7 @@
             </Item>
             <Item id="tcm:2-120-2" title="Editor" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
               <Item id="tcm:2-124-2" title="Schemas" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
+                <Item id="tcm:2-413-8" title="Search%20Indexing%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="LocalItem" selected="true" exported="true" />
                 <Item id="tcm:2-412-8" title="Search%20Query" extension="xsd" itemType="Schema" blueprintStatus="LocalItem" selected="true" exported="true" />
               </Item>
               <Item id="tcm:2-125-2" title="Templates" itemType="Folder" blueprintStatus="LocalItem" selected="true" exported="true">
@@ -56,6 +64,7 @@
             </Item>
             <Item id="tcm:4-120-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
               <Item id="tcm:4-124-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:4-413-8" title="Search%20Indexing%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="SharedItem" selected="true" exported="true" />
                 <Item id="tcm:4-412-8" title="Search%20Query" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
               </Item>
               <Item id="tcm:4-125-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
@@ -106,6 +115,7 @@
             </Item>
             <Item id="tcm:5-120-2" title="Editor" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
               <Item id="tcm:5-124-2" title="Schemas" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
+                <Item id="tcm:5-413-8" title="Search%20Indexing%20Metadata" extension="xsd" itemType="Schema" subtype="3" blueprintStatus="SharedItem" selected="true" exported="true" />
                 <Item id="tcm:5-412-8" title="Search%20Query" extension="xsd" itemType="Schema" blueprintStatus="SharedItem" selected="true" exported="true" />
               </Item>
               <Item id="tcm:5-125-2" title="Templates" itemType="Folder" blueprintStatus="SharedItem" selected="true" exported="true">
