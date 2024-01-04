@@ -67,7 +67,7 @@
       AssemblyInfoFiles="@(AssemblyInfoFile)"
       AssemblyVersion="$(Version)"
       AssemblyFileVersion="$(VersionMajor).$(VersionMinor).$(VersionPatch).$(VersionBuild)"
-      AssemblyCopyright="Copyright &#169; 2014-$(Year) SDL Group"
+      AssemblyCopyright="Copyright &#169; 2014-$(Year) RWS Group"
       SkipVersioning="false"
     />
 
@@ -130,6 +130,7 @@
       <BinFiles Include="%(ModulePath.Identity)\bin\$(BuildConfiguration)\**\*" />
       <CmContentWeb8 Include="$(ContentFolder)\web8\content\**\*" />
       <CmContentSites9 Include="$(ContentFolder)\sites9\content\**\*" />
+	  <CmContentSites10 Include="$(ContentFolder)\sites10\content\**\*" />
       <Scripts Include="$(ScriptsFolder)\**\*.*" />
       <ImportExport Include="$(InstallationFolder)\cms\ImportExport\**\*" />
     </ItemGroup>
@@ -150,6 +151,12 @@
     <MakeDir Directories="$(DstModuleFolder)\sites9" Condition="Exists('$(ContentFolder)\sites9\content') And !Exists('$(DstModuleFolder)\sites9')" />
     <MSBuild.ExtensionPack.Compression.DNZip Condition="Exists('$(DstModuleFolder)\sites9')" TaskAction="Create" CompressPath="$(ContentFolder)\sites9\content" ZipFileName="$(DstModuleFolder)\sites9\module-$(ModuleName).zip" RemoveRoot="$(ContentFolder)\sites9\content"/>
     <Copy Condition="Exists('$(ContentFolder)\sites9\permissions.xml')" SourceFiles="$(ContentFolder)\sites9\permissions.xml" DestinationFolder="$(DstModuleFolder)\sites9" />
+	
+	<!-- Package CM content for module if it exists (sites10) -->
+    <Message Text="Creating CM Content artifacts ..." Importance="high" />
+    <MakeDir Directories="$(DstModuleFolder)\sites10" Condition="Exists('$(ContentFolder)\sites10\content') And !Exists('$(DstModuleFolder)\sites10')" />
+    <MSBuild.ExtensionPack.Compression.DNZip Condition="Exists('$(DstModuleFolder)\sites10')" TaskAction="Create" CompressPath="$(ContentFolder)\sites10\content" ZipFileName="$(DstModuleFolder)\sites10\module-$(ModuleName).zip" RemoveRoot="$(ContentFolder)\sites10\content"/>
+    <Copy Condition="Exists('$(ContentFolder)\sites10\permissions.xml')" SourceFiles="$(ContentFolder)\sites10\permissions.xml" DestinationFolder="$(DstModuleFolder)\sites10" />
 
     <!-- Copy scripts for module -->
     <Copy SourceFiles="@(Scripts)" DestinationFolder="$(DstModuleFolder)\%(RecursiveDir)"/>
