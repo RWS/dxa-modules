@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sdl.dxa.caching.NeverCached;
 import com.sdl.dxa.caching.NoOutputCache;
-import com.sdl.dxa.modules.smarttarget.wrapper.CookieProcessorWrapper;
+import com.sdl.dxa.modules.smarttarget.utils.CookieProcessor;
 import com.sdl.webapp.common.api.model.PageModel;
 import com.sdl.webapp.common.api.model.page.DefaultPageModel;
 import com.tridion.smarttarget.query.ExperimentCookie;
@@ -55,7 +55,7 @@ public class SmartTargetPageModel extends DefaultPageModel implements PageModel.
     @Override
     public boolean setResponseData(HttpServletResponse servletResponse) {
         log.debug("Setting {} to servlet response", newExperimentCookies);
-        CookieProcessorWrapper.saveExperimentCookies(servletResponse, null, this.newExperimentCookies);
+        CookieProcessor.saveExperimentCookies(servletResponse, null, this.newExperimentCookies);
         return true;
     }
 }

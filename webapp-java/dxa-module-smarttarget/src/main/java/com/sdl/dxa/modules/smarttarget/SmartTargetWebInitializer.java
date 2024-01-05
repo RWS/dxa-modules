@@ -1,6 +1,6 @@
 package com.sdl.dxa.modules.smarttarget;
 
-import com.sdl.dxa.modules.smarttarget.wrapper.TrackingRedirectWrapperServlet;
+import com.sdl.dxa.modules.smarttarget.analytics.tracking.TrackingRedirect;
 import com.sdl.webapp.common.util.InitializationUtils;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.AnalyticsManager;
@@ -18,7 +18,7 @@ public class SmartTargetWebInitializer implements WebApplicationInitializer {
         String servletName = "dxaXoTracking";
         String mapping = getRedirectUrl();
 
-        servletContext.addServlet(servletName, TrackingRedirectWrapperServlet.class).addMapping(mapping);
+        servletContext.addServlet(servletName, TrackingRedirect.class).addMapping(mapping);
         log.info("XO tracking servlet is added with name {} and mapping {}", servletName, mapping);
     }
 

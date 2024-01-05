@@ -10,6 +10,7 @@ import com.sdl.dxa.modules.docs.search.exception.SearchException;
 import com.sdl.dxa.modules.docs.search.model.SearchParameters;
 import com.sdl.dxa.modules.docs.search.model.SearchResult;
 import com.sdl.dxa.modules.docs.search.model.SearchResultSet;
+import com.sdl.webapp.common.controller.exception.SearchParametersProcessingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -111,7 +112,7 @@ public class SearchServiceTest {
 
     @Test
     public void testParseParametersIncorrectJson() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+        Assertions.assertThrows(SearchParametersProcessingException.class, () -> {
             final String parameters = "{asdfd...";
             service.parseParameters(parameters);
         });
