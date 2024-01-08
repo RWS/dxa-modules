@@ -1,19 +1,37 @@
-SDL Digital Experience Accelerator Modules
+RWS Digital Experience Accelerator Modules
 ===
 Build status
 ------------
-Java:
-- Develop: [![Build Status](https://travis-ci.com/sdl/dxa-modules.svg?branch=develop)](https://travis-ci.com/sdl/dxa-modules)
-- 1.8: [![Build Status](https://travis-ci.com/sdl/dxa-modules.svg?branch=release%2F1.8)](https://travis-ci.com/sdl/dxa-modules)
+### Java
+- Develop: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=develop)
+- 1.8: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=release/1.8)
 
-NET:
-- Develop: ![Build Status](https://github.com/sdl/dxa-modules/workflows/dotnet/badge.svg?branch=develop)
-- 2.2: ![Build Status](https://github.com/sdl/dxa-modules/workflows/dotnet/badge.svg?branch=release/2.2)
-- 1.8: ![Build Status](https://github.com/sdl/dxa-modules/workflows/dotnet/badge.svg?branch=release/1.8)
+### NET
+- Develop: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_dotnet/badge.svg?branch=develop)
+- 1.8: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_dotnet/badge.svg?branch=release/1.8)
+
+### GUI
+- Develop ![build Status](https://github.com/sdl/dxa-modules/workflows/build_GUI/badge.svg?branch=develop)
+
+Prerequisites
+-------------
+For building .NET modules you must have the following installed:
+- Visual Studio 2019
+- .NET Framework 4.6.2
+
+For building Java modules you must have the following installed:
+- Maven 3.2+
+- Maven should be available in the system PATH
+
+Build
+-----
+For building .NET modules: see readme in webapp-net
+
+For building Java modules: `cd webapp-java; mvn install`
 
 About
 -----
-The SDL Digital Experience Accelerator (DXA) is a reference implementation of SDL Tridion Sites 9 and SDL Web 8 intended to help you create, design and publish an SDL Tridion/Web-based website quickly.
+The RWS Digital Experience Accelerator (DXA) is a reference implementation of SDL Tridion Sites 9 and SDL Web 8 intended to help you create, design and publish an SDL Tridion/Web-based website quickly.
 
 DXA is available for both .NET and Java web applications. Its modular architecture consists of a framework and example web application, which includes all core SDL Tridion/Web functionality as well as separate Modules for additional, optional functionality.
 
@@ -24,11 +42,11 @@ The Module distributions (including Content Manager-side items and installation 
 
 Support
 ---------------
-At SDL we take your investment in Digital Experience very seriously, if you encounter any issues with the Digital Experience Accelerator, please use one of the following channels:
+At RWS we take your investment in Digital Experience very seriously, if you encounter any issues with the Digital Experience Accelerator, please use one of the following channels:
 
 - Report issues directly in [this repository](https://github.com/sdl/dxa-modules/issues)
 - Ask questions 24/7 on the SDL Tridion Community at https://tridion.stackexchange.com
-- Contact SDL Professional Services for DXA release management support packages to accelerate your support requirements
+- Contact RWS Professional Services for DXA release management support packages to accelerate your support requirements
 
 
 Documentation
@@ -38,22 +56,14 @@ Documentation for most of the SDL DXA Modules can be found online in the SDL doc
 
 Repositories
 ------------
-The following repositories with source code are available:
-
- - https://github.com/sdl/dxa-content-management - CM-side framework (.NET Template Building Blocks)
- - https://github.com/sdl/dxa-html-design - Whitelabel HTML Design
- - https://github.com/sdl/dxa-model-service - Model Service (Java)
- - https://github.com/sdl/dxa-modules - Modules (.NET and Java)
- - https://github.com/sdl/dxa-web-application-dotnet - ASP.NET MVC web application (including framework)
- - https://github.com/sdl/dxa-web-application-java - Java Spring MVC web application (including framework)
+You can find all the DXA related repositories [here](https://github.com/sdl/?q=dxa&type=source&language=)
 
 
 Branches and Contributions
 --------------------------
 We are using the following branching strategy:
 
- - `master` - Represents the latest stable version. This may be a pre-release version (tagged as `DXA x.y Sprint z`). Updated each development Sprint (approximately bi-weekly).
- - `develop` - Represents the latest development version. Updated very frequently (typically nightly).
+ - `develop` - Represents the latest development version.
  - `release/x.y` - Represents the x.y Release. If hotfixes are applicable, they will be applied to the appropriate release branch so that the branch actually represents the initial release plus hotfixes.
 
 All releases (including pre-releases and hotfix releases) are tagged. 
@@ -82,7 +92,7 @@ DXA publishes SNAPSHOT versions to Sonatype. To use them, configure `https://oss
 
 License
 -------
-Copyright (c) 2014-2020 SDL Group.
+Copyright (c) 2014-2021 SDL Group.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

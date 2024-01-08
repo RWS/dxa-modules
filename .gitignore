@@ -7,3 +7,6 @@ packages/
 *.iml
 .vs/
 dist/
+**/node_modules/
+**/target/
+**/node/

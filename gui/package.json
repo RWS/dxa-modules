@@ -100,7 +100,7 @@
   "scripts": {
     "start": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp serve",
     "build": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp",
-    "build-server": "gulp build:dist",
+    "build-server": "npm install && gulp build:dist",
     "test": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp test",
     "test-debug": "set NODE_OPTIONS='--max-old-space-size=2048' && gulp serve:test",
     "install": "napa"

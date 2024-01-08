@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.sdl.dxa</groupId>
+        <artifactId>dxa-oss-parent</artifactId>
+        <version>2.2.11</version>
+    </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dynamic-documentation-gui</artifactId>
@@ -12,13 +15,17 @@
     <packaging>pom</packaging>
 
     <properties>
-        <npm.repo>https://nexus.sdl.com/content/groups/npm/</npm.repo>
-        <npm.publish.repo>https://nexus.sdl.com/repository/npm-internal/</npm.publish.repo>
         <frontend.maven.plugin.version>1.0</frontend.maven.plugin.version>
         <node.version>v6.11.2</node.version>
         <npm.version>4.6.1</npm.version>
-        <tag>latest</tag>
     </properties>
+
+    <scm>
+        <url>https://github.com/sdl/dxa-modules</url>
+        <connection>scm:git:git@github.com:sdl/dxa-modules.git</connection>
+        <developerConnection>scm:git:git@github.com:sdl/dxa-modules.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
     <build>
         <finalName>${project.artifactId}</finalName>
@@ -46,36 +53,6 @@
                     </execution>
 
                     <execution>
-                        <id>npm prune</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>prune -registry=${npm.repo}</arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>npm update</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>update -registry=${npm.repo}</arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>install -registry=${npm.repo} --unsafe-perm</arguments>
-                        </configuration>
-                    </execution>
-
-                    <execution>
                         <id>build script</id>
                         <goals>
                             <goal>npm</goal>
@@ -88,19 +65,35 @@
                             <arguments>run-script build-server -- --targetPath target/gui/</arguments>
                         </configuration>
                     </execution>
-
+                    
                     <execution>
-                        <id>npm publish</id>
+                        <id>npm prune</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
-
-                        <phase>deploy</phase>
-
                         <configuration>
-                            <arguments>publish -registry=${npm.publish.repo} --access=public --tag=${tag}</arguments>
+                            <arguments>prune</arguments>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>npm update</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>update</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install --unsafe-perm</arguments>
+                        </configuration>
+                    </execution>
+
                 </executions>
             </plugin>
 

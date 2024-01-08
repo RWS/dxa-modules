@@ -1,23 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.sdl.dxa</groupId>
         <artifactId>dxa-oss-parent</artifactId>
-        <version>2.2.11</version>
-        <relativePath></relativePath>
+        <version>2.2.33</version>
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-modules</artifactId>
+    <version>2.2.30-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>DXA Modules</name>
     <description>Top level project of DXA module</description>
 
     <properties>
+        <dxa-modules.version>${project.version}</dxa-modules.version>
+        <dxa-module-core.version>${project.version}</dxa-module-core.version>
+        <dxa-module-cid.version>${project.version}</dxa-module-cid.version>
+        <dxa-module-googleanalytics.version>${project.version}</dxa-module-googleanalytics.version>
+        <dxa-module-mediamanager.version>${project.version}</dxa-module-mediamanager.version>
+        <dxa-module-search.version>${project.version}</dxa-module-search.version>
+        <dxa-module-smarttarget.version>${project.version}</dxa-module-smarttarget.version>
+        <dxa-module-context-expressions>${project.version}</dxa-module-context-expressions>
+        <dxa-module-51degrees.version>${project.version}</dxa-module-51degrees.version>
+        <dxa-module-audience-manager.version>${project.version}</dxa-module-audience-manager.version>
+        <dxa-module-ugc.version>${project.version}</dxa-module-ugc.version>
+        <dxa-module-test.version>${project.version}</dxa-module-test.version>
+        <dxa-module-tridion-docs-mashup.version>${project.version}</dxa-module-tridion-docs-mashup.version>
+        <dxa-module-tridion-docs-search.version>${project.version}</dxa-module-tridion-docs-search.version>
+        <dxa-module-dd.version>${project.version}</dxa-module-dd.version>
         <javax.servlet-api.version>3.0.1</javax.servlet-api.version>
     </properties>
 
@@ -44,13 +57,34 @@
      <module>dxa-module-ugc</module>
      <module>dxa-module-dynamic-documentation</module>
    </modules>
+   
+    <repositories>
+       <repository>
+         <id>sonatype-nexus-snapshots</id>
+         <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+         <releases><enabled>false</enabled></releases>
+         <snapshots><enabled>true</enabled></snapshots>
+       </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.sdl.tridion.xo</groupId>
                 <artifactId>xo-compatible-client</artifactId>
-                <version>11.0.0-1072</version>
+                <version>11.5.0-1173</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.10.19</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>1.10.19</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

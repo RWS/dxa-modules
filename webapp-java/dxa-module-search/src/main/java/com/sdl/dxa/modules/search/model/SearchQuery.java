@@ -103,11 +103,7 @@ public class SearchQuery extends AbstractEntityModel {
         }
 
         public String getQueryText() {
-            try {
-                return isEmpty(queryText) ? "" : decode(queryText, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException("Should never happen", e);
-            }
+            return isEmpty(queryText) ? "" : decode(queryText, "UTF-8");
         }
     }
 }

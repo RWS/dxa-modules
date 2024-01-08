@@ -1,0 +1,23 @@
+          
+name: build_dotnet
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout...
+      uses: actions/checkout@v2
+    - name: Adding msbuild to PATH...
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Restoring NuGet Packages...
+      run: nuget restore webapp-net/DxaModules.sln
+    - name: Building and Publishing Web App...
+      run: msbuild webapp-net/DxaModules.sln /p:Configuration=Release

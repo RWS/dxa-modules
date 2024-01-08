@@ -11,8 +11,8 @@ Param(
     [Parameter(Mandatory=$true, HelpMessage="The file system path of the root folder of your DXA Web Application")]
     [string]$DistDestination,
 
-    [Parameter(Mandatory=$false, HelpMessage="The registry where all needed NMP packages lay")]
-    [string]$npmRegistry="https://nexus.sdl.com/content/groups/npm/",
+    [Parameter(Mandatory=$true, HelpMessage="The registry where all needed NMP packages lay")]
+    [string]$npmRegistry,
 
     [Parameter(Mandatory=$false, HelpMessage="The registry where all needed NMP packages lay")]
     [string]$UiTargetPath,
