@@ -4,6 +4,7 @@ Build status
 ------------
 ### Java
 - Develop: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=develop)
+- 2.2: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=release/2.2)
 - 1.8: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=release/1.8)
 
 ### NET
@@ -29,19 +30,74 @@ For building .NET modules: see readme in webapp-net
 
 For building Java modules: `cd webapp-java; mvn install`
 
+Compatibility Matrices for Java DXA
+-----------------------------------
+<table>
+    <tr>
+        <th nowrap="nowrap">Java DXA Version</th>
+        <th nowrap="nowrap">Tridion Sites 10</th>
+        <th nowrap="nowrap">Tridion Sites 9.6</th>
+        <th nowrap="nowrap">Tridion Sites 9.5</th>
+        <th nowrap="nowrap">Tridion Sites 9.1</th>
+    </tr>
+    <tr>
+        <td nowrap="nowrap">2.2.x</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+    </tr>
+    <tr text-align="center">
+        <td nowrap="nowrap">2.3.x</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th nowrap="nowrap">Java DXA Version</th>
+        <th nowrap="nowrap">JDK 1.8</th>
+        <th nowrap="nowrap">JDK 11</th>
+        <th nowrap="nowrap">JDK 17</th>
+        <th nowrap="nowrap">Tomcat 9</th>
+        <th nowrap="nowrap">Tomcat 10</th>
+    </tr>
+    <tr>
+        <td nowrap="nowrap">2.2.x</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">❌</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">❌</td>
+    </tr>
+    <tr text-align="center">
+        <td nowrap="nowrap">2.3.x</td>
+        <td nowrap="nowrap" align="center">❌</td>
+        <td nowrap="nowrap" align="center">❌</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+        <td nowrap="nowrap" align="center">❌</td>
+        <td nowrap="nowrap" align="center">✔️</td>
+    </tr>
+</table>
+
+The latest `Java DXA 2.3` version includes the `Spring Framework version 6` and `Jakarta Servlet API` as dependencies.
+
 About
 -----
-The RWS Digital Experience Accelerator (DXA) is a reference implementation of SDL Tridion Sites 9 and SDL Web 8 intended to help you create, design and publish an SDL Tridion/Web-based website quickly.
+The RWS Digital Experience Accelerator (DXA) is a reference implementation of RWS Tridion Sites 10, 9.x and RWS Web 8 intended to help you create, design and publish an RWS Tridion/Web-based website quickly.
 
 DXA is available for both .NET and Java web applications. Its modular architecture consists of a framework and example web application, which includes all core SDL Tridion/Web functionality as well as separate Modules for additional, optional functionality.
 
-This repository contains the source code of all the DXA Modules maintained by SDL. 
+This repository contains the source code of all the DXA Modules maintained by SDL.
 
-The Module distributions (including Content Manager-side items and installation support) are downloadable from the [SDL AppStore](https://appstore.sdl.com/list/?search=dxa) or the [Releases in GitHub](https://github.com/sdl/dxa-modules/releases).
+The Module distributions (including Content Manager-side items and installation support) are downloadable from the [Releases in GitHub](https://github.com/sdl/dxa-modules/releases).
 
 
 Support
----------------
+-------
 At RWS we take your investment in Digital Experience very seriously, if you encounter any issues with the Digital Experience Accelerator, please use one of the following channels:
 
 - Report issues directly in [this repository](https://github.com/sdl/dxa-modules/issues)
@@ -51,7 +107,7 @@ At RWS we take your investment in Digital Experience very seriously, if you enco
 
 Documentation
 -------------
-Documentation for most of the SDL DXA Modules can be found online in the SDL documentation portal: https://docs.sdl.com/sdldxa
+Documentation for most of the SDL DXA Modules can be found online in the SDL documentation portal: https://docs.rws.com/publications/DXA
 
 
 Repositories
@@ -66,7 +122,7 @@ We are using the following branching strategy:
  - `develop` - Represents the latest development version.
  - `release/x.y` - Represents the x.y Release. If hotfixes are applicable, they will be applied to the appropriate release branch so that the branch actually represents the initial release plus hotfixes.
 
-All releases (including pre-releases and hotfix releases) are tagged. 
+All releases (including pre-releases and hotfix releases) are tagged.
 
 If you wish to submit a Pull Request, it should normally be submitted on the `develop` branch so that it can be incorporated in the upcoming release.
 
@@ -81,9 +137,9 @@ DXA Builder
 -----------
 The current DXA Builder is available in Maven Central, and the latest DXA Builder is also available as a public snapshot.
 
-If you have not configured a snapshot repository and don't want to, you may need to install the DXA Builder locally in order to run the SNAPSHOT. 
+If you have not configured a snapshot repository and don't want to, you may need to install the DXA Builder locally in order to run the SNAPSHOT.
 
-To install it, run the wrapper script of the `dxa-builder` project: `gradlew(.bat) publishLocal` 
+To install it, run the wrapper script of the `dxa-builder` project: `gradlew(.bat) publishLocal`
 On Windows, you can also just run `get-started.cmd` script at first run.
 
 Snapshots
@@ -92,7 +148,7 @@ DXA publishes SNAPSHOT versions to Sonatype. To use them, configure `https://oss
 
 License
 -------
-Copyright (c) 2014-2021 SDL Group.
+Copyright (c) 2014-2024 RWS Group.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

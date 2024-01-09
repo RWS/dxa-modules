@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -121,7 +120,6 @@ public class SearchService {
         try {
             return READER.readValue(parametersJson);
         } catch (Exception e) {
-            log.error("Could not parse search parameters: {}", parametersJson, e);
             throw new SearchParametersProcessingException("Could not parse search parameters from String.", e);
         }
     }

@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.sdl.dxa</groupId>
         <artifactId>dxa-oss-parent</artifactId>
-        <version>2.2.33</version>
+        <version>2.3.0-RC1</version>
     </parent>
 
     <groupId>com.sdl.dxa.modules</groupId>
     <artifactId>dxa-modules</artifactId>
-    <version>2.2.30-SNAPSHOT</version>
+    <version>2.3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>DXA Modules</name>
@@ -26,12 +26,10 @@
         <dxa-module-context-expressions>${project.version}</dxa-module-context-expressions>
         <dxa-module-51degrees.version>${project.version}</dxa-module-51degrees.version>
         <dxa-module-audience-manager.version>${project.version}</dxa-module-audience-manager.version>
-        <dxa-module-ugc.version>${project.version}</dxa-module-ugc.version>
         <dxa-module-test.version>${project.version}</dxa-module-test.version>
         <dxa-module-tridion-docs-mashup.version>${project.version}</dxa-module-tridion-docs-mashup.version>
         <dxa-module-tridion-docs-search.version>${project.version}</dxa-module-tridion-docs-search.version>
         <dxa-module-dd.version>${project.version}</dxa-module-dd.version>
-        <javax.servlet-api.version>3.0.1</javax.servlet-api.version>
     </properties>
 
     <scm>
@@ -43,7 +41,6 @@
 
    <modules>
      <module>dxa-module-51degrees</module>
-     <module>dxa-module-audience-manager</module>
      <module>dxa-module-cid</module>
      <module>dxa-module-context-expressions</module>
      <module>dxa-module-core</module>
@@ -54,7 +51,6 @@
      <module>dxa-module-test</module>
      <module>dxa-module-tridion-docs-mashup</module>
      <module>dxa-module-tridion-docs-search</module>
-     <module>dxa-module-ugc</module>
      <module>dxa-module-dynamic-documentation</module>
    </modules>
    
@@ -72,18 +68,22 @@
             <dependency>
                 <groupId>com.sdl.tridion.xo</groupId>
                 <artifactId>xo-compatible-client</artifactId>
-                <version>11.5.0-1173</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>1.10.19</version>
-                <scope>test</scope>
+                <version>12.0.0-1216</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.servlet.jsp</groupId>
+                        <artifactId>javax.servlet.jsp-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javax.servlet</groupId>
+                        <artifactId>javax.servlet-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
-                <version>1.10.19</version>
+                <version>5.8.0</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

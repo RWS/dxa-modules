@@ -31,8 +31,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.xml.bind.ValidationException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.xml.bind.ValidationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;

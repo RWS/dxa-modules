@@ -5,15 +5,14 @@ import com.sdl.webapp.common.api.model.entity.Link;
 import com.sdl.webapp.common.api.model.entity.Tag;
 import com.sdl.webapp.common.api.model.query.SimpleBrokerQuery;
 import org.jetbrains.annotations.NotNull;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.eq;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -161,30 +160,32 @@ public class ContentListTest {
         assertEquals(3, currentPage);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldThrowIAEIfPageSizeIsZero() {
-        //given
-        ContentList contentList = new ContentList();
-        contentList.setPageSize(0);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            // Given
+            ContentList contentList = new ContentList();
+            contentList.setPageSize(0);
 
-        //when
-        contentList.setStart(10);
+            // When
+            contentList.setStart(10);
 
-        //then
-        //IAE
+            // Then IAE
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void shouldThrowIAEIfPageSizeIsLessThanZero() {
-        //given
-        ContentList contentList = new ContentList();
-        contentList.setPageSize(-10);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            // Given
+            ContentList contentList = new ContentList();
+            contentList.setPageSize(-10);
 
-        //when
-        contentList.setStart(10);
+            // When
+            contentList.setStart(10);
 
-        //then
-        //IAE
+            // Then IAE
+        });
     }
 
     @Test

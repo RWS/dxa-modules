@@ -6,7 +6,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.Charset;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ import static org.springframework.http.MediaType.TEXT_PLAIN;
  */
 @Configuration
 @EnableWebMvc
-public class DDMvcConfig extends WebMvcConfigurerAdapter {
+public class DDMvcConfig implements WebMvcConfigurer {
     /* Time, in seconds, to have the browser cache static resources (one week). */
     private static final int BROWSER_CACHE_CONTROL = 604800;
 
