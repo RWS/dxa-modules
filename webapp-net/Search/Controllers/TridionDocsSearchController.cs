@@ -196,7 +196,7 @@ namespace Sdl.Web.Modules.Search.Controllers
                     PublicationTitle = result.Node.Search.PublicationTitle,
                     Meta = result.Node.Search.Fields,
                     Highlighted = result.Node.Search.Highlighted,
-                    ItemType = result.Node.Search.ItemType
+                    ItemType = (result.Node.Search.ItemType == Sdl.Tridion.Api.Client.ItemType.Binary)? "binary":"Page"
                 };
 
                 searchResultSet.QueryResults.Add(searchResult);

@@ -65,8 +65,7 @@ namespace Sdl.Web.Modules.Search.Providers
             SearchItem searchItem = (SearchItem)Activator.CreateInstance(modelType);
             searchItem.MvcData = new MvcData(viewName);
             searchItem.Id = result.Id;
-            //searchItem.Title = GetContentTitle(result.Id.Replace("_", ":"), result.PageTitle);
-            searchItem.Title = result.PageTitle;
+            searchItem.Title = GetPageModelTitle(result.Id.Replace("_", ":"), result.PageTitle);
             searchItem.Url = result.Url;
             searchItem.Summary = GetTrimmedContent(result.Highlighted.Contains(contentLanguageFilter) ? result.Highlighted[contentLanguageFilter].ToString() : result.Content);
             searchItem.CustomFields = new Dictionary<string, object>();
@@ -93,7 +92,7 @@ namespace Sdl.Web.Modules.Search.Providers
 
         private string GetLanguage(string language) => string.IsNullOrEmpty(language) ? _defaultLanguage : CultureInfo.GetCultureInfo(language.Split('-')[0]).EnglishName.ToLower();
 
-        private string GetContentTitle(string pageUri, string pageTitle)
+        private string GetPageModelTitle(string pageUri, string pageTitle)
         {
             if (string.IsNullOrEmpty(pageUri)) { return string.Empty; }
 
@@ -106,36 +105,26 @@ namespace Sdl.Web.Modules.Search.Providers
             {
                 return pageTitle;
             }
-            HashSet<string> validRegionNames = new HashSet<string> { "Main" };
-            foreach (var regions in pageModel.Regions)
-            {
-                if (validRegionNames.Contains(regions.Name) && regions.Entities.Any())
-                {
-                    foreach (var entity in regions.Entities)
-                    {
-                        if (entity != null)
-                        {
-                            Type entityType = entity.GetType();
 
-                            // Check if the entity is of type Article using reflection
-                            if (entityType.FullName == "Sdl.Web.Modules.Core.Models.Article")
-                            {
-                                PropertyInfo headlineProperty = entityType.GetProperty("Headline");
-                                if (headlineProperty != null)
-                                {
-                                    object headlineValue = headlineProperty.GetValue(entity);
-                                    if (headlineValue != null)
-                                    {
-                                        return headlineValue.ToString();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            IDictionary coreResources = WebRequestContext.Localization.GetResources("core");
+
+            string separator = string.Empty;
+            if (coreResources.Contains("core.pageTitleSeparator"))
+            {
+                separator = coreResources["core.pageTitleSeparator"].ToString();
             }
 
-            return pageTitle;
+            string suffix = string.Empty;
+            if (coreResources.Contains("core.pageTitlePostfix"))
+            {
+                suffix = coreResources["core.pageTitlePostfix"].ToString();
+            }
+
+            string replaceTitleSeparatorPostix = $"{separator}{suffix}";
+
+            string title = pageModel.Title.Replace(replaceTitleSeparatorPostix, "");
+
+            return title;
         }
 
         protected virtual NameValueCollection SetupParameters(SearchQuery searchQuery, Localization localization)
