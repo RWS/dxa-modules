@@ -18,30 +18,30 @@ import com.sdl.webapp.common.api.model.RegionModelSet;
 import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.region.RegionModelImpl;
 import com.sdl.webapp.common.api.model.region.RegionModelSetImpl;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import jakarta.xml.bind.ValidationException;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import javax.xml.bind.ValidationException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyMapOf;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyMap;
+import static org.mockito.Mockito.*;
 
 /**
  * Test for TridionDocsMashupController class.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class TridionDocsMashupControllerTest {
     private final RichText TOPIC_TITLE = new RichText("Test Topic");
     private final String PRODUCT_VIEW_MODEL = "Test View";
@@ -60,9 +60,7 @@ public class TridionDocsMashupControllerTest {
 
     TridionDocsMashupController controller;
 
-    private ExpectedException thrown = ExpectedException.none();
-
-    @Before
+    @BeforeEach
     public void init() throws DocsMashupException {
         controller = new TridionDocsMashupController(webRequestContext, contentProvider, tridionDocsClient);
 
@@ -71,9 +69,9 @@ public class TridionDocsMashupControllerTest {
         List<Topic> topics = new ArrayList<>();
         topics.add(topic);
 
-        when(webRequestContext.getLocalization()).thenReturn(localization);
-        when(localization.getCulture()).thenReturn("de");
-        when(tridionDocsClient.getTopicsByKeywords(anyMapOf(String.class, KeywordModel.class), anyInt())).thenReturn(topics);
+        lenient().when(webRequestContext.getLocalization()).thenReturn(localization);
+        lenient().when(localization.getCulture()).thenReturn("de");
+        lenient().when(tridionDocsClient.getTopicsByKeywords(anyMap(), anyInt())).thenReturn(topics);
     }
 
     private Map<String, KeywordModel> getTestKeywords() {
@@ -97,8 +95,8 @@ public class TridionDocsMashupControllerTest {
         StaticWidget actual = (StaticWidget)controller.enrichModel(staticWidget, new MockHttpServletRequest());
 
         //then
-        Assert.assertEquals(1, actual.getTopics().size());
-        Assert.assertEquals(TOPIC_TITLE, actual.getTopics().get(0).getTitle());
+        assertEquals(1, actual.getTopics().size());
+        assertEquals(TOPIC_TITLE, actual.getTopics().get(0).getTitle());
     }
 
     @Test
@@ -135,8 +133,8 @@ public class TridionDocsMashupControllerTest {
         DynamicWidget actual = (DynamicWidget)controller.enrichModel(dynamicWidget, new MockHttpServletRequest());
 
         //then
-        Assert.assertEquals(1, actual.getTopics().size());
-        Assert.assertEquals(TOPIC_TITLE, actual.getTopics().get(0).getTitle());
+        assertEquals(1, actual.getTopics().size());
+        assertEquals(TOPIC_TITLE, actual.getTopics().get(0).getTitle());
     }
 
     @Test
@@ -150,7 +148,7 @@ public class TridionDocsMashupControllerTest {
         StaticWidget actual = (StaticWidget)controller.enrichModel(staticWidget, new MockHttpServletRequest());
 
         //then
-        Assert.assertNull(actual.getTopics()); //Nothing should be returned when MaxItems is null
+        assertNull(actual.getTopics()); //Nothing should be returned when MaxItems is null
     }
 
     @Test
@@ -164,23 +162,25 @@ public class TridionDocsMashupControllerTest {
         StaticWidget actual = (StaticWidget)controller.enrichModel(staticWidget, new MockHttpServletRequest());
 
         //then
-        Assert.assertNull(actual.getTopics()); //Nothing should be returned when MaxItems is 0
+        assertNull(actual.getTopics()); //Nothing should be returned when MaxItems is 0
     }
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void shouldThrowWhenKeywordsNotInRightFormat() throws Exception {
-        //given
-        Map<String, KeywordModel> keywords = new HashMap<>();
+        Assertions.assertThrows(ValidationException.class, () -> {
+            //given
+            Map<String, KeywordModel> keywords = new HashMap<>();
 
-        KeywordModel CONTENTREFTYPE = new KeywordModel();
-        CONTENTREFTYPE.setId("1");
-        keywords.put("FMBCONTENTREFTYPE", CONTENTREFTYPE);
+            KeywordModel CONTENTREFTYPE = new KeywordModel();
+            CONTENTREFTYPE.setId("1");
+            keywords.put("FMBCONTENTREFTYPE", CONTENTREFTYPE);
 
-        StaticWidget staticWidget = new StaticWidget();
-        staticWidget.setKeywords(keywords);
-        staticWidget.setMaxItems(1);
+            StaticWidget staticWidget = new StaticWidget();
+            staticWidget.setKeywords(keywords);
+            staticWidget.setMaxItems(1);
 
-        //when
-        StaticWidget actual = (StaticWidget)controller.enrichModel(staticWidget, new MockHttpServletRequest());
+            //when
+            StaticWidget actual = (StaticWidget) controller.enrichModel(staticWidget, new MockHttpServletRequest());
+        });
     }
 }

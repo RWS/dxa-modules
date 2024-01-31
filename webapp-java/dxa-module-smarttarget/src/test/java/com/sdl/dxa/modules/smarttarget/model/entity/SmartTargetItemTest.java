@@ -7,28 +7,22 @@ import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.api.model.mvcdata.MvcDataImpl;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = SmartTargetItemTest.ContextConfig.class)
-@ActiveProfiles("test")
+//@ActiveProfiles("test")
 public class SmartTargetItemTest {
 
     @Autowired
@@ -51,11 +45,12 @@ public class SmartTargetItemTest {
         assertEquals(expected, entity);
         assertEquals(expected, entity2);
 
-        verify(contentProvider, times(1)).getEntityModel(eq("qwe1"), any(Localization.class));
+        verify(contentProvider, times(1)).getEntityModel(eq("qwe1"),
+                nullable(Localization.class));
     }
 
     @Configuration
-    @Profile("test")
+    //@Profile("test")
     public static class ContextConfig {
 
         @Bean
@@ -84,9 +79,9 @@ public class SmartTargetItemTest {
         @Bean
         public ContentProvider contentProvider() throws DxaException {
             ContentProvider contentProvider = mock(ContentProvider.class);
-            when(contentProvider.getEntityModel(eq("qwe1"), any(Localization.class)))
+            lenient().when(contentProvider.getEntityModel(eq("qwe1"), nullable(Localization.class)))
                     .thenReturn(entityModel1());
-            when(contentProvider.getEntityModel(eq("qwe2"), any(Localization.class)))
+            lenient().when(contentProvider.getEntityModel(eq("qwe2"), nullable(Localization.class)))
                     .thenReturn(entityModel1());
             return contentProvider;
         }

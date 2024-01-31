@@ -5,14 +5,11 @@ import com.sdl.webapp.common.api.model.RichText;
 import com.sdl.webapp.common.api.model.entity.Link;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TeaserTest {
 

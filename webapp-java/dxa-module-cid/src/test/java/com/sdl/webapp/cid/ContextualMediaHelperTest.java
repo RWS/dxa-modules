@@ -3,18 +3,18 @@ package com.sdl.webapp.cid;
 import com.sdl.webapp.common.api.MediaHelper;
 import com.sdl.webapp.common.impl.DefaultMediaHelper;
 import com.sdl.webapp.common.impl.WebRequestContextImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 import java.net.UnknownHostException;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContextualMediaHelperTest {
 
@@ -22,7 +22,7 @@ public class ContextualMediaHelperTest {
     private static final int SERVER_PORT = 8080;
     private static MediaHelper mediaHelper = new DefaultMediaHelper();
 
-    @BeforeClass
+    @BeforeAll
     public static void before() {
         WebRequestContextImpl requestContext = mock(WebRequestContextImpl.class);
         when(requestContext.getDisplayWidth()).thenReturn(1920);
@@ -48,19 +48,19 @@ public class ContextualMediaHelperTest {
 
     @Test
     public void testGetResponsiveImageUrl() throws Exception {
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "100%", 3.3, 12), is("/cid/scale/2048x621/" + getHostname() + "/example.jpg"));
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "100%", 3.3, 6), is("/cid/scale/1024x311/" + getHostname() + "/example.jpg"));
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "100%", 2.0, 12), is("/cid/scale/2048x1024/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "100%", 3.3, 12), equalTo("/cid/scale/2048x621/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "100%", 3.3, 6), equalTo("/cid/scale/1024x311/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "100%", 2.0, 12), equalTo("/cid/scale/2048x1024/" + getHostname() + "/example.jpg"));
 
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "50%", 3.3, 12), is("/cid/scale/1024x311/" + getHostname() + "/example.jpg"));
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "50%", 3.3, 6), is("/cid/scale/640x194/" + getHostname() + "/example.jpg"));
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "75%", 2.0, 12), is("/cid/scale/2048x1024/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "50%", 3.3, 12), equalTo("/cid/scale/1024x311/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "50%", 3.3, 6), equalTo("/cid/scale/640x194/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "75%", 2.0, 12), equalTo("/cid/scale/2048x1024/" + getHostname() + "/example.jpg"));
 
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "320", 2.5, 12), is("/cid/scale/320x128/" + getHostname() + "/example.jpg"));
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "321", 2.5, 12), is("/cid/scale/640x256/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "320", 2.5, 12), equalTo("/cid/scale/320x128/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "321", 2.5, 12), equalTo("/cid/scale/640x256/" + getHostname() + "/example.jpg"));
 
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "639", 2.5, 12), is("/cid/scale/640x256/" + getHostname() + "/example.jpg"));
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "640", 2.5, 12), is("/cid/scale/640x256/" + getHostname() + "/example.jpg"));
-        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "641", 2.5, 12), is("/cid/scale/1024x410/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "639", 2.5, 12), equalTo("/cid/scale/640x256/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "640", 2.5, 12), equalTo("/cid/scale/640x256/" + getHostname() + "/example.jpg"));
+        assertThat(mediaHelper.getResponsiveImageUrl("/example.jpg", "641", 2.5, 12), equalTo("/cid/scale/1024x410/" + getHostname() + "/example.jpg"));
     }
 }

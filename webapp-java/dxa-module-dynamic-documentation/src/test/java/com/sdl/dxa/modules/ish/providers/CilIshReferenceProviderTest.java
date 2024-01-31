@@ -12,28 +12,25 @@ import com.tridion.ItemTypes;
 import com.tridion.broker.StorageException;
 import com.tridion.broker.querying.MetadataType;
 import com.tridion.meta.Item;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static com.sdl.dxa.modules.ish.providers.IshReferenceProvider.REF_FIELD_NAME;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
-import static org.mockito.Mockito.doCallRealMethod;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
 /**
  * Provider which returns meta information for given publication.
  */
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class CilIshReferenceProviderTest {
     private static final Integer PUB_ID = 10992;
     private static final String LOGICAL_REF_VALUE = "ishlogicalref.object.id.value";
@@ -53,11 +50,11 @@ public class CilIshReferenceProviderTest {
     @Spy
     private CilIshReferenceProvider provider;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
-        doReturn(anyCriteria).when(provider).createCriteria(PUB_ID, LOGICAL_REF_VALUE);
-        doReturn(query).when(provider).createQuery(anyCriteria);
-        when(query.executeEntityQuery()).thenReturn(new Item[FIRST_CRITERIA_INDEX]);
+        lenient().doReturn(anyCriteria).when(provider).createCriteria(PUB_ID, LOGICAL_REF_VALUE);
+        lenient().doReturn(query).when(provider).createQuery(anyCriteria);
+        lenient().when(query.executeEntityQuery()).thenReturn(new Item[FIRST_CRITERIA_INDEX]);
     }
 
     @Test
@@ -68,7 +65,7 @@ public class CilIshReferenceProviderTest {
         List<BrokerCriteria> criterias = criteria.getCriteriaChildren();
         assertEquals(TOTAL_CRITERIAS, criterias.size());
         ItemLastPublishedDateCriteria criteria1 = (ItemLastPublishedDateCriteria) criterias.get(FIRST_CRITERIA_INDEX);
-        Assert.assertNotNull(criteria1.getConvertedDate());
+        assertNotNull(criteria1.getConvertedDate());
         CustomMetaValueCriteria criteria2 = (CustomMetaValueCriteria) criterias.get(SECOND_CRITERIA_INDEX);
         assertEquals(REF_FIELD_NAME, criteria2.getMetadataKey());
         assertEquals(LOGICAL_REF_VALUE, criteria2.getValue());
@@ -91,11 +88,13 @@ public class CilIshReferenceProviderTest {
         assertEquals(0, item.getId());
     }
 
-    @Test(expected = ContentProviderException.class)
+    @Test
     public void getPageIdByIshLogicalReferenceVerifyNullNotOneResult() throws Exception {
-        when(query.executeEntityQuery()).thenReturn(new Item[]{pageId, pageId});
+        Assertions.assertThrows(ContentProviderException.class, () -> {
+            when(query.executeEntityQuery()).thenReturn(new Item[]{pageId, pageId});
 
-        provider.getPageIdByIshLogicalReference(PUB_ID, LOGICAL_REF_VALUE);
+            provider.getPageIdByIshLogicalReference(PUB_ID, LOGICAL_REF_VALUE);
+        });
     }
 
     @Test
@@ -105,17 +104,19 @@ public class CilIshReferenceProviderTest {
         assertEquals(pageId, provider.getPageIdByIshLogicalReference(PUB_ID, LOGICAL_REF_VALUE));
     }
 
-    @Test(expected = ContentProviderException.class)
+    @Test
     public void getPageIdByIshLogicalReferenceVerifyException() throws Exception {
-        when(query.executeEntityQuery()).thenThrow(StorageException.class);
-
-        provider.getPageIdByIshLogicalReference(PUB_ID, LOGICAL_REF_VALUE);
+        Assertions.assertThrows(ContentProviderException.class, () -> {
+            when(query.executeEntityQuery()).thenThrow(StorageException.class);
+            provider.getPageIdByIshLogicalReference(PUB_ID, LOGICAL_REF_VALUE);
+        });
     }
 
-    @Test(expected = ContentProviderException.class)
+    @Test
     public void getPageIdByIshLogicalReferenceResultAsNull() throws Exception {
-        when(query.executeEntityQuery()).thenReturn(null);
-
-        provider.getPageIdByIshLogicalReference(PUB_ID, LOGICAL_REF_VALUE);
+        Assertions.assertThrows(ContentProviderException.class, () -> {
+            when(query.executeEntityQuery()).thenReturn(null);
+            provider.getPageIdByIshLogicalReference(PUB_ID, LOGICAL_REF_VALUE);
+        });
     }
 }

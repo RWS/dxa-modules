@@ -16,24 +16,25 @@ import com.sdl.webapp.common.api.model.region.RegionModelSetImpl;
 import com.sdl.webapp.common.exceptions.DxaException;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.utils.TcmUri;
-import junit.framework.TestCase;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Collections;
 
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
+import static org.mockito.hamcrest.MockitoHamcrest.argThat;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SmartTargetPageBuilderTest {
 
     @Mock
@@ -59,10 +60,10 @@ public class SmartTargetPageBuilderTest {
         return pageModel;
     }
 
-    @Before
+    @BeforeEach
     public void init() {
-        when(webRequestContext.getLocalization()).thenReturn(localization);
-        when(localization.getId()).thenReturn("1");
+        lenient().when(webRequestContext.getLocalization()).thenReturn(localization);
+        lenient().when(localization.getId()).thenReturn("1");
     }
 
     @Test
@@ -83,21 +84,21 @@ public class SmartTargetPageBuilderTest {
             }
         };
 
-        Mockito.doReturn(null).when(pageBuilder).executeSmartTargetQuery(Matchers.any(SmartTargetPageModel.class), Matchers.any(TcmUri.class));
+        Mockito.doReturn(null).when(pageBuilder).executeSmartTargetQuery(any(SmartTargetPageModel.class), any(TcmUri.class));
         when(httpServletRequest.getCookies()).thenReturn(new Cookie[]{});
 
         //when
         pageBuilder.processQueryAndPromotions(localization, model, null);
 
         //then
-        Mockito.verify(pageBuilder).executeSmartTargetQuery(Matchers.any(SmartTargetPageModel.class), Matchers.argThat(uriMatcher));
+        Mockito.verify(pageBuilder).executeSmartTargetQuery(any(SmartTargetPageModel.class), argThat(uriMatcher));
     }
 
     @Test
     public void shouldHavePositiveePriority() {
         //then
         //lower is more priority
-        TestCase.assertTrue(this.pageBuilder.getOrder() >= 0);
+        assertTrue(this.pageBuilder.getOrder() >= 0);
     }
 
     @Test
@@ -118,8 +119,8 @@ public class SmartTargetPageBuilderTest {
         PageModel page2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", "tcm", null, null, null, null, null, null));
 
         //then
-        Assert.assertEquals(expected, pageModel);
-        Assert.assertEquals(expected, page2);
+        assertEquals(expected, pageModel);
+        assertEquals(expected, page2);
     }
 
     @Test
@@ -140,8 +141,8 @@ public class SmartTargetPageBuilderTest {
         PageModel pageR2 = pageBuilder.buildPageModel(pageModel, new PageModelData("", "tcm", null, null, null, null, null, ""));
 
         //then
-        Assert.assertEquals(expected, pageModel);
-        Assert.assertEquals(expected, pageR2);
+        assertEquals(expected, pageModel);
+        assertEquals(expected, pageR2);
     }
 
     private void shouldCallSubclassForSmartTargetAndProcessMetadata_R2(String maxItemsValue) throws DxaException {
@@ -154,17 +155,17 @@ public class SmartTargetPageBuilderTest {
         PageModelData pageModelData = new PageModelData("id", "tcm", null, Collections.emptyMap(), null, "title", Lists.newArrayList(regionModelData), "");
 
         SmartTargetPageModel stPageModel = Mockito.mock(SmartTargetPageModel.class);
-        when(stPageModel.setAllowDuplicates(Matchers.anyBoolean())).thenReturn(stPageModel);
-        when(stPageModel.containsRegion(Matchers.eq("test"))).thenReturn(true);
-        when(stPageModel.getRegions()).thenReturn(pageModel.getRegions());
+        lenient().when(stPageModel.setAllowDuplicates(anyBoolean())).thenReturn(stPageModel);
+        lenient().when(stPageModel.containsRegion(eq("test"))).thenReturn(true);
+        lenient().when(stPageModel.getRegions()).thenReturn(pageModel.getRegions());
 
-        Mockito.doNothing().when(pageBuilder).processQueryAndPromotions(Matchers.any(Localization.class), Matchers.any(SmartTargetPageModel.class), Matchers.anyString());
+        Mockito.doNothing().when(pageBuilder).processQueryAndPromotions(any(Localization.class), any(SmartTargetPageModel.class), anyString());
 
         //when
         SmartTargetPageModel page = ((SmartTargetPageModel) pageBuilder.buildPageModel(pageModel, pageModelData));
 
         //then
-        Assert.assertEquals(42, smartTargetRegion.getMaxItems());
-        Mockito.verify(pageBuilder).processQueryAndPromotions(Matchers.eq(localization), Matchers.eq(page), Matchers.eq("SmartTarget:Entity:Promotion"));
+        assertEquals(42, smartTargetRegion.getMaxItems());
+        Mockito.verify(pageBuilder).processQueryAndPromotions(eq(localization), eq(page), eq("SmartTarget:Entity:Promotion"));
     }
 }

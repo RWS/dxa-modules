@@ -1,45 +1,48 @@
 package com.sdl.dxa.modules.core.model.entity;
 
 import com.sdl.webapp.common.exceptions.DxaException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ImageTest {
 
     private Image image;
 
-    @Before
+    @BeforeEach
     public void init() {
         image = new Image();
         image.setUrl("url");
     }
 
     // TSI-3044
-    @Test(expected = DxaException.class)
+    @Test
     public void shouldNotRecursivelyCallToString_IfNull_InToHtmlElement() throws DxaException {
-        //given
-        image.setUrl(null);
+        Assertions.assertThrows(DxaException.class, () -> {
+            // Given
+            image.setUrl(null);
 
-        //when
-        image.toHtmlElement("100%");
+            // When
+            image.toHtmlElement("100%");
 
-        //then
-        // expect exception
+            // Then expect exception
+        });
     }
 
     // TSI-3044
-    @Test(expected = DxaException.class)
+    @Test
     public void shouldNotRecursivelyCallToString_IfEmpty_InToHtmlElement() throws DxaException {
-        //given
-        image.setUrl("");
+        Assertions.assertThrows(DxaException.class, () -> {
+            // Given
+            image.setUrl("");
 
-        //when
-        image.toHtmlElement("100%");
+            // When
+            image.toHtmlElement("100%");
 
-        //then
-        // expect exception
+            // Then expect exception
+        });
     }
 
     // TSI-3044

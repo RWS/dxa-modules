@@ -4,13 +4,14 @@ import com.google.common.collect.ImmutableMap;
 import com.sdl.webapp.common.api.model.MvcData;
 import com.sdl.webapp.common.api.model.mvcdata.MvcDataImpl;
 import com.sdl.webapp.common.exceptions.DxaException;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.isEmptyString;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SmartTargetRegionTest {
 
@@ -26,10 +27,12 @@ public class SmartTargetRegionTest {
         assertEquals("<!-- Start Promotion Region: { \"RegionID\": \"TestRegion\" } -->", xpmMarkup);
     }
 
-    @Test(expected = DxaException.class)
+    @Test
     public void shouldNotAllowToSetNullName() throws DxaException {
-        //when
-        new SmartTargetRegion(null, "Test:Test");
+        Assertions.assertThrows(DxaException.class, () -> {
+            //when
+            new SmartTargetRegion(null, "Test:Test");
+        });
     }
 
     @Test

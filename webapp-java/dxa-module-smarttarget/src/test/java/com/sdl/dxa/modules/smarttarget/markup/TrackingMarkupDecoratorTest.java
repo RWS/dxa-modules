@@ -8,14 +8,13 @@ import com.sdl.webapp.common.markup.html.HtmlNode;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.AnalyticsManager;
 import com.tridion.smarttarget.analytics.tracking.ExperimentDimensions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
-import static junit.framework.TestCase.assertSame;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.eq;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -64,7 +63,7 @@ public class TrackingMarkupDecoratorTest {
         decorator.processMarkupByAnalytics(mock(HtmlNode.class), experiment);
 
         //then
-        verify(analyticsManager).addTrackingToLinks(anyString(), eq(dimensions), eq(Collections.emptyMap()));
+        verify(analyticsManager).addTrackingToLinks(nullable(String.class), eq(dimensions), anyMap());
     }
 
     @SuppressWarnings("unchecked")
