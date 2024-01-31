@@ -1,14 +1,14 @@
 package com.sdl.dxa.modules.smarttarget;
 
+import com.sdl.dxa.modules.smarttarget.analytics.tracking.TrackingRedirect;
 import com.sdl.webapp.common.util.InitializationUtils;
 import com.tridion.smarttarget.SmartTargetException;
 import com.tridion.smarttarget.analytics.AnalyticsManager;
-import com.tridion.smarttarget.analytics.tracking.TrackingRedirect;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.WebApplicationInitializer;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 
 @Slf4j
 public class SmartTargetWebInitializer implements WebApplicationInitializer {

@@ -9,19 +9,19 @@ import com.sdl.dxa.modules.context.model.Conditions;
 import com.sdl.webapp.common.api.model.EntityModel;
 import com.sdl.webapp.common.api.model.entity.AbstractEntityModel;
 import com.sdl.webapp.common.exceptions.DxaException;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ContextExpressionModelBuilderTest {
 
     private ContextExpressionModelBuilder builder;
 
-    @Before
+    @BeforeEach
     public void init() {
         builder = new ContextExpressionModelBuilder();
     }
@@ -37,14 +37,14 @@ public class ContextExpressionModelBuilderTest {
         EntityModel entityR2 = builder.buildEntityModel(testEntity, entityModelData, null);
 
         //then
-        Assert.assertSame(testEntity, entityR2);
+        assertSame(testEntity, entityR2);
 
         //when
         entityModelData = EntityModelData.builder().extensionData(Collections.emptyMap()).build();
         entityR2 = builder.buildEntityModel(testEntity, entityModelData, null);
 
         //then
-        Assert.assertSame(testEntity, entityR2);
+        assertSame(testEntity, entityR2);
     }
 
     @Test

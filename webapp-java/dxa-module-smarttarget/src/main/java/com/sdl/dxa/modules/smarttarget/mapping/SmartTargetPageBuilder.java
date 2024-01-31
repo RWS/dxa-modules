@@ -9,6 +9,7 @@ import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetItem;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPageModel;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetPromotion;
 import com.sdl.dxa.modules.smarttarget.model.entity.SmartTargetRegion;
+import com.sdl.dxa.modules.smarttarget.utils.CookieProcessor;
 import com.sdl.dxa.tridion.mapping.PageModelBuilder;
 import com.sdl.webapp.common.api.WebRequestContext;
 import com.sdl.webapp.common.api.localization.Localization;
@@ -31,7 +32,6 @@ import com.tridion.smarttarget.query.builder.PublicationCriteria;
 import com.tridion.smarttarget.query.builder.QueryBuilder;
 import com.tridion.smarttarget.query.builder.RegionCriteria;
 import com.tridion.smarttarget.utils.AmbientDataHelper;
-import com.tridion.smarttarget.utils.CookieProcessor;
 import com.tridion.smarttarget.utils.TcmUri;
 import lombok.Builder;
 import lombok.NonNull;
@@ -44,7 +44,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.*;
 
@@ -285,7 +285,7 @@ public class SmartTargetPageBuilder implements Ordered, PageModelBuilder {
 
     private void filterPromotionsForPage(Localization localization, SmartTargetPageModel stPageModel,
                                          final List<Promotion> promotions, String promotionViewName) throws SmartTargetException {
-//        // TODO: we shouldn't access ServletRequest in a Model Builder.
+        // TODO: we shouldn't access ServletRequest in a Model Builder.
         Map<String, ExperimentCookie> existingExperimentCookies = CookieProcessor.getExperimentCookies(httpServletRequest);
         Map<String, ExperimentCookie> newExperimentCookies = new HashMap<>();
 

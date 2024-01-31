@@ -6,21 +6,21 @@ import com.sdl.dxa.modules.smarttarget.markup.TrackingMarkupDecorator;
 import com.sdl.webapp.common.util.ApplicationContextHolder;
 import com.tridion.smarttarget.analytics.tracking.ExperimentDimensions;
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.io.IOException;
 
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = SmartTargetExperimentTest.SpringConfigurationContext.class)
 @ActiveProfiles("test")
 public class SmartTargetExperimentTest {
