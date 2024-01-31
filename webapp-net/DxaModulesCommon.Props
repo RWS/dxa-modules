@@ -12,7 +12,7 @@
 	    <DxaDataModelVersion>2.2.0</DxaDataModelVersion>
 		<DxaFrameworkVersion>2.2.12</DxaFrameworkVersion>
         <SdlDeliveryVersion>12.0.1197</SdlDeliveryVersion>
-		<SdlPCAPackageVersion>2.2.2</SdlPCAPackageVersion>		
+		<SdlPCAPackageVersion>2.2.3</SdlPCAPackageVersion>		
 		<AudienceManagerVersion>9.0.0</AudienceManagerVersion>
         <ExperienceManagerVersion>10.0.1197</ExperienceManagerVersion>
 		<ContextClientVersion>12.0.1197</ContextClientVersion>
