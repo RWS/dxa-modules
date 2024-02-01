@@ -5,6 +5,6 @@
 
     @if (!String.IsNullOrEmpty(Model.Summary))
     {
-        <p class="list-group-item-text">@Model.Summary</p>
+        <p class="list-group-item-text">@Html.Raw(Model.Summary)</p>
     }
 </a>

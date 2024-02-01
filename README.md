@@ -3,22 +3,25 @@ RWS Digital Experience Accelerator Modules
 Build status
 ------------
 ### Java
+- Develop: ![Build Status](https://github.com/rws/dxa-modules/workflows/build_java/badge.svg?branch=develop)
+- 1.8: ![Build Status](https://github.com/rws/dxa-modules/workflows/build_java/badge.svg?branch=release/1.8)
+=======
 - Develop: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=develop)
 - 2.2: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=release/2.2)
 - 1.8: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=release/1.8)
 
 ### NET
-- Develop: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_dotnet/badge.svg?branch=develop)
-- 1.8: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_dotnet/badge.svg?branch=release/1.8)
+- Develop: ![Build Status](https://github.com/rws/dxa-modules/workflows/build_dotnet/badge.svg?branch=develop)
+- 1.8: ![Build Status](https://github.com/rws/dxa-modules/workflows/build_dotnet/badge.svg?branch=release/1.8)
 
 ### GUI
-- Develop ![build Status](https://github.com/sdl/dxa-modules/workflows/build_GUI/badge.svg?branch=develop)
+- Develop ![build Status](https://github.com/rws/dxa-modules/workflows/build_GUI/badge.svg?branch=develop)
 
 Prerequisites
 -------------
 For building .NET modules you must have the following installed:
 - Visual Studio 2019
-- .NET Framework 4.6.2
+- .NET Framework 4.8
 
 For building Java modules you must have the following installed:
 - Maven 3.2+
@@ -87,12 +90,16 @@ The latest `Java DXA 2.3` version includes the `Spring Framework version 6` and 
 
 About
 -----
+The RWS Digital Experience Accelerator (DXA) is a reference implementation of RWS Tridion Sites 9 and SDL Web 8 intended to help you create, design and publish an SDL Tridion/Web-based website quickly.
+=======
 The RWS Digital Experience Accelerator (DXA) is a reference implementation of RWS Tridion Sites 10, 9.x and RWS Web 8 intended to help you create, design and publish an RWS Tridion/Web-based website quickly.
 
 DXA is available for both .NET and Java web applications. Its modular architecture consists of a framework and example web application, which includes all core SDL Tridion/Web functionality as well as separate Modules for additional, optional functionality.
 
 This repository contains the source code of all the DXA Modules maintained by SDL.
 
+The Module distributions (including Content Manager-side items and installation support) are downloadable from the [SDL AppStore](https://appstore.sdl.com/list/?search=dxa) or the [Releases in GitHub](https://github.com/rws/dxa-modules/releases).
+=======
 The Module distributions (including Content Manager-side items and installation support) are downloadable from the [Releases in GitHub](https://github.com/sdl/dxa-modules/releases).
 
 

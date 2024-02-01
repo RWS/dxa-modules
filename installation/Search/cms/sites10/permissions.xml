@@ -1,0 +1,32 @@
+<export>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/Search/Admin">
+    <permissions group="Everyone">None</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">None</permissions>
+    <permissions group="Developer">None</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/Search/Developer">
+    <permissions group="Everyone">None</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">None</permissions>
+    <permissions group="Developer">All</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/Search/Editor">
+    <permissions group="Everyone">None</permissions>
+    <permissions group="Editor">Read</permissions>
+    <permissions group="Site Manager">None</permissions>
+    <permissions group="Developer">None</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Modules/Search/Site%20Manager">
+    <permissions group="Everyone">None</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">Read</permissions>
+    <permissions group="Developer">None</permissions>
+  </organizationalItem>
+  <organizationalItem path="/webdav/100%20Master/Building%20Blocks/Settings/Search/Site%20Manager">
+    <permissions group="Everyone">None</permissions>
+    <permissions group="Editor">None</permissions>
+    <permissions group="Site Manager">Read,Write,Localize</permissions>
+    <permissions group="Developer">None</permissions>
+  </organizationalItem>
+</export>

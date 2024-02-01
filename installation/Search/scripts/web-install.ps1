@@ -12,8 +12,8 @@ Param(
     [string]$distDestination,
 
     #The type name of the Search Provider to use. Can be 'SolrProvider' or 'AwsCloudSearchProvider'.
-    [Parameter(Mandatory=$false, HelpMessage="The type name of the Search Provider to use. Can be 'SolrProvider' or 'AwsCloudSearchProvider'.")]
-    [ValidateSet("SolrProvider", "AwsCloudSearchProvider")]
+    [Parameter(Mandatory=$false, HelpMessage="The type name of the Search Provider to use. Can be 'SolrProvider' or 'AwsCloudSearchProvider' or 'TridionSitesSearchProvider'.")]
+    [ValidateSet("SolrProvider", "AwsCloudSearchProvider","TridionSitesSearchProvider")]
     $searchProviderType = "SolrProvider"
 )
 

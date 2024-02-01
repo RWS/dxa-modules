@@ -500,6 +500,17 @@ function Is-Web8
     return $false
 }
 
+function Is-Sites10
+{
+    $cmsVersion = $coreServiceClient.GetApiVersion()
+    $majorVersion = $cmsVersion.Split(".")[0] -as [int];
+    if($majorVersion -eq 10)
+    {
+        return $true
+    }
+    return $false
+}
+
 function Add-CmVersion($packageFullPath)
 {
     $cmsVersion = if(Is-Web8) {"web8"} else {"sites9"}  
@@ -512,6 +523,51 @@ function Import-CmPackage($packageFullPath, $tempFolder, $mappings = $null)
 {
     # Adjust the package path to include cm version
     $packageFullPath = Add-CmVersion($packageFullPath)
+
+    Write-Host "Uploading package '$packageFullPath' ..."
+    $filename = (Get-ChildItem $packageFullPath).BaseName
+    $extension = (Get-ChildItem $packageFullPath).Extension
+    $uploadId = Invoke-UploadPackageFromFile $packageFullPath
+
+    Write-Host "Importing content ..."
+    $importInstruction = New-Object Tridion.ContentManager.ImportExport.ImportInstruction
+    #$importInstruction.LogLevel = "Debug"
+    $importInstruction.LogLevel = "Normal"
+    $importInstruction.CreateUndoPackage = $false
+    $importInstruction.SchemaSynchronizeFlags = "FixNamespace, RemoveUnknownFields, RemoveAdditionalValues, ApplyDefaultValuesForMissingMandatoryFields, ConvertFieldType"
+
+    if ($mappings)
+    {
+        Write-Verbose "Using mappings:"
+        $mappings | ForEach-Object { Write-Verbose "`t'$($_.ExportUrl)' -> '$($_.ImportUrl)'" }
+        $importInstruction.UserMappings = [Tridion.ContentManager.ImportExport.Packaging.Mapping[]]($mappings)
+    }
+    
+    $importExportClient = Get-ImportExportServiceClient
+    $processId = $importExportClient.StartImport($uploadId, ($importInstruction))
+    $state = Wait-ImportExportFinish $importExportClient $processId
+    Write-Host $state
+    $importExportClient.Dispose()
+
+    # Download log and output it
+    $importLogFullPath = "$($tempFolder)$($filename)-import.log"
+    Invoke-DownloadLog $processId $importLogFullPath
+    Get-Content $importLogFullPath
+
+    if ($state -ne "Finished") 
+    {
+        throw "An error occured while importing '$packageFullPath'"
+    }
+}
+
+function Import-CmPackage($packageFullPath, $tempFolder, $mappings = $null,$cmsVersion)
+{
+    # Adjust the package path to include cm version
+	#$packageFullPath = Add-CmVersion($packageFullPath)
+    $outputFilename = Split-Path $packageFullPath -leaf
+    $packageFullPath = Join-Path -Path $packageFullPath.Replace($outputFilename, $cmsVersion) -ChildPath $outputFilename
+	
+	
 
     Write-Host "Uploading package '$packageFullPath' ..."
     $filename = (Get-ChildItem $packageFullPath).BaseName

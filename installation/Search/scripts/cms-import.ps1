@@ -38,6 +38,10 @@ param (
     [Parameter(Mandatory=$false, HelpMessage="Title of the Root Folder")]
     [string]$rootFolder = "Building Blocks",
 
+	# By default, the SI4T based package module will be imported
+	[ValidateSet("SI4TSearch", "SitesSearch")]
+    [string]$cmsPackageImportSearchType = "SI4TSearch",
+
     # By default, the current Windows user's credentials are used, but it is possible to specify alternative credentials:
     [Parameter(Mandatory=$false, HelpMessage="CMS User name")]
     [string]$cmsUserName,
@@ -45,7 +49,7 @@ param (
     [string]$cmsUserPassword,
     [Parameter(Mandatory=$false, HelpMessage="CMS Authentication type")]
     [ValidateSet("Windows", "Basic")]
-    [string]$cmsAuth = "Windows"
+    [string]$cmsAuth = "Windows"	
 )
 
 #Include functions from ContentManagerUtils.ps1
@@ -90,8 +94,15 @@ if ($importType -ne "permissions-only")
     $siteTypeRootFolderWebDavUrl = Encode-WebDav "$siteTypePublication/$rootFolder"
     $siteTypeRootSgWebDavUrl = Encode-WebDav "$siteTypePublication/$rootStructureGroup"
 
-    Import-CmPackage $importPackageFullPath $tempFolder $detailedMapping
-
+    if($cmsPackageImportSearchType -ne "SI4TSearch")
+	{
+		$cmsVersion = "sites10"
+		Import-CmPackage $importPackageFullPath $tempFolder $detailedMapping $cmsVersion
+	}
+	else
+	{
+		Import-CmPackage $importPackageFullPath $tempFolder $detailedMapping
+	}
 
     if(Is-Web8) 
     {
@@ -109,19 +120,22 @@ if ($importType -ne "permissions-only")
             -regionName "Nav"
     }
   
-	Add-TemplateToCompound `
-        "$masterRootFolderWebDavUrl/Modules/Search/Developer/Search Template Building Blocks/Enable Search Indexing.tbbcmp" `
-        "$masterRootFolderWebDavUrl/Framework/Developer/Templates/DXA.R2/Default Page Template Finish Actions.tbbcmp" 
+	if($cmsPackageImportSearchType -ne "SitesSearch")
+	{
+		Add-TemplateToCompound `
+			"$masterRootFolderWebDavUrl/Modules/Search/Developer/Search Template Building Blocks/Enable Search Indexing.tbbcmp" `
+			"$masterRootFolderWebDavUrl/Framework/Developer/Templates/DXA.R2/Default Page Template Finish Actions.tbbcmp" 
 
-	Add-MetadataToItem `
-        "$masterRootSgWebDavUrl/_System" `
-        "$masterRootFolderWebDavUrl/Modules/Search/Editor/Schemas/Search Indexing Metadata.xsd" `
-        "<Metadata xmlns=""http://www.sdl.com/web/schemas/search""><NoIndex>Yes</NoIndex></Metadata>"
+		Add-MetadataToItem `
+			"$masterRootSgWebDavUrl/_System" `
+			"$masterRootFolderWebDavUrl/Modules/Search/Editor/Schemas/Search Indexing Metadata.xsd" `
+			"<Metadata xmlns=""http://www.sdl.com/web/schemas/search""><NoIndex>Yes</NoIndex></Metadata>"
 
-	Add-MetadataToItem `
-        "$siteTypeRootSgWebDavUrl/_Error Page Not Found.tpg" `
-        "$siteTypeRootFolderWebDavUrl/Modules/Search/Editor/Schemas/Search Indexing Metadata.xsd" `
-        "<Metadata xmlns=""http://www.sdl.com/web/schemas/search""><NoIndex>Yes</NoIndex></Metadata>"    
+		Add-MetadataToItem `
+			"$siteTypeRootSgWebDavUrl/_Error Page Not Found.tpg" `
+			"$siteTypeRootFolderWebDavUrl/Modules/Search/Editor/Schemas/Search Indexing Metadata.xsd" `
+			"<Metadata xmlns=""http://www.sdl.com/web/schemas/search""><NoIndex>Yes</NoIndex></Metadata>"    
+	}
 }
 
 #   NOTE - this should be executed last after importing all modules and does not work for mapped publications
