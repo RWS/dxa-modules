@@ -1,8 +1,8 @@
 package com.sdl.dxa.modules.ish.model;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlEnumValue;
+import jakarta.xml.bind.annotation.XmlEnum;
+import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlEnumValue;
 @XmlType(
         name = "yesNo"
 )
