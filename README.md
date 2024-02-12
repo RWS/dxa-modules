@@ -4,14 +4,12 @@ Build status
 ------------
 ### Java
 - Develop: ![Build Status](https://github.com/rws/dxa-modules/workflows/build_java/badge.svg?branch=develop)
-- 1.8: ![Build Status](https://github.com/rws/dxa-modules/workflows/build_java/badge.svg?branch=release/1.8)
-=======
-- Develop: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=develop)
 - 2.2: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=release/2.2)
 - 1.8: ![Build Status](https://github.com/sdl/dxa-modules/workflows/build_java/badge.svg?branch=release/1.8)
 
 ### NET
 - Develop: ![Build Status](https://github.com/rws/dxa-modules/workflows/build_dotnet/badge.svg?branch=develop)
+- 2.2: ![Build Status](https://github.com/rws/dxa-modules/workflows/build_dotnet/badge.svg?branch=release/2.2)
 - 1.8: ![Build Status](https://github.com/rws/dxa-modules/workflows/build_dotnet/badge.svg?branch=release/1.8)
 
 ### GUI
