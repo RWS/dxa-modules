@@ -22,8 +22,10 @@ public class DynamicDocumentationPageController extends BaseController {
     @Autowired
     private MainController mainController;
 
+    /*
     @RequestMapping(value = {"/"}, method = GET)
     public String home() {
         return mainController.home();
     }
+    */
 }

@@ -40,4 +40,7 @@ public class Publication {
 
     @JsonProperty("LogicalId")
     private String logicalId;
+
+    @JsonProperty("CustomMetas")
+    private List<CustomMeta> customMetas;
 }

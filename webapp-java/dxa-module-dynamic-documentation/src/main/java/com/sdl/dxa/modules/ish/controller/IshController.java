@@ -118,8 +118,8 @@ public class IshController {
      */
     @RequestMapping(method = {GET, POST}, value = "/api/page/{publicationId}/{pageId}/**",
             produces = {APPLICATION_JSON_VALUE})
-    public ModelAndView getPage(@PathVariable Integer publicationId,
-                                @PathVariable Integer pageId,
+    public ModelAndView getPage(@PathVariable("publicationId") Integer publicationId,
+                                @PathVariable("pageId") Integer pageId,
                                 @RequestParam(value = "conditions", defaultValue = "") String conditions,
                                 final HttpServletRequest request,
                                 final HttpServletResponse response) throws ContentProviderException, IOException {
@@ -148,8 +148,8 @@ public class IshController {
     @RequestMapping(method = GET, value = "/binary/{publicationId}/{binaryId}/**", produces = MediaType.ALL_VALUE)
     @ResponseBody
     public void getBinaryResource(HttpServletResponse response,
-                                  @PathVariable String publicationId,
-                                  @PathVariable String binaryId) throws ContentProviderException, BadRequestException, NotFoundException, IOException {
+                                  @PathVariable("publicationId") String publicationId,
+                                  @PathVariable("binaryId") String binaryId) throws ContentProviderException, BadRequestException, NotFoundException, IOException {
         int publicationIdInt = -1;
         try {
             publicationIdInt = Integer.parseInt(publicationId);

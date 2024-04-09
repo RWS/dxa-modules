@@ -58,10 +58,12 @@ public class MainController {
      *
      * @return          Home page for Docs (all the publications)
      */
+    /*
     @RequestMapping(value = {"/home", "/publications/**", "/publications/{value:.+$}"}, method = GET)
     public String home(){
         return getHomeView();
     }
+    */
 
     /**
      * Home page.
@@ -71,12 +73,14 @@ public class MainController {
      * @return Publication home page content
      * @throws ContentProviderException in case if data retrieving fails
      */
+    /*
     @RequestMapping(value = "/{publicationId:[0-9]+}", method = GET)
     public String home(@PathVariable("publicationId") String publicationId,
                        HttpServletRequest request) throws ContentProviderException {
         setPageModelOnRequest(publicationId, null, request);
         return getHomeView();
     }
+    */
 
     /**
      * Home page.
@@ -87,6 +91,7 @@ public class MainController {
      * @return content of the page
      * @throws ContentProviderException in case if data retrieving fails
      */
+    /*
     @RequestMapping(value = "/{publicationId:[0-9]+}/{pageId}/**", method = GET)
     public String home(@PathVariable("publicationId") String publicationId,
                        @PathVariable("pageId") String pageId,
@@ -94,10 +99,13 @@ public class MainController {
         setPageModelOnRequest(publicationId, pageId, request);
         return getHomeView();
     }
+    */
 
+    /*
     private String getHomeView() {
         return "home";
     }
+    */
 
     private void setPageModelOnRequest(String publicationId, String pageId, HttpServletRequest request) throws ContentProviderException {
         final DocsLocalization localization = (DocsLocalization) webRequestContext.getLocalization();

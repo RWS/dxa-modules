@@ -135,9 +135,13 @@ public class GraphQLPublicationService implements PublicationService {
         CustomMetaConnection customMeta = publication.getCustomMetas();
         if (customMeta == null) return result;
 
+        List<com.sdl.dxa.modules.ish.model.CustomMeta> customMetas = new ArrayList<>();
+
         for (CustomMetaEdge customMetaEdge : customMeta.getEdges()) {
             String value = customMetaEdge.getNode().getValue();
             String key = customMetaEdge.getNode().getKey();
+            customMetas.add(new com.sdl.dxa.modules.ish.model.CustomMeta(key, value));
+
             switch (key) {
                 case PublicationTitleMeta:
                     result.setTitle(value);
@@ -179,6 +183,8 @@ public class GraphQLPublicationService implements PublicationService {
                     break;
             }
         }
+
+        result.setCustomMetas(customMetas);
 
         return result;
     }
