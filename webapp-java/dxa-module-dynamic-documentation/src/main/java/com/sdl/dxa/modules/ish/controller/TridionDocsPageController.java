@@ -23,9 +23,11 @@ public class TridionDocsPageController {
      * @param response  Http response
      * @return Redirects to the home page.
      */
+    /*
     @RequestMapping(method = RequestMethod.GET, value = "/ish/",
             produces = {MediaType.TEXT_HTML_VALUE, MediaType.ALL_VALUE})
     public String handleGetPage(HttpServletRequest request, HttpServletResponse response) {
         return "redirect:home";
     }
+    */
 }
