@@ -42,6 +42,7 @@ public class DDModuleInitializer {
      *
      * @return The view resolver.
      */
+    /*
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -51,6 +52,7 @@ public class DDModuleInitializer {
         viewResolver.setOrder(Ordered.LOWEST_PRECEDENCE);
         return viewResolver;
     }
+    */
 
     @Bean
     public ObjectMapper objectMapper() {
