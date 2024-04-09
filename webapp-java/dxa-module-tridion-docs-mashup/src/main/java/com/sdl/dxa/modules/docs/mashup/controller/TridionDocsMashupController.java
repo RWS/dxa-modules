@@ -143,8 +143,8 @@ public class TridionDocsMashupController extends EntityController {
      */
      @RequestMapping(method = GET, value ="/binary/{publicationId}/{binaryId}/**" ,produces = MediaType.ALL_VALUE)
     @ResponseBody
-    public ResponseEntity<InputStreamResource> getBinaryResource(@PathVariable Integer publicationId,
-                                                                 @PathVariable Integer binaryId)
+    public ResponseEntity<InputStreamResource> getBinaryResource(@PathVariable("publicationId") Integer publicationId,
+                                                                 @PathVariable("binaryId") Integer binaryId)
             throws ContentProviderException, IOException {
 
         HttpHeaders responseHeaders = new HttpHeaders();
