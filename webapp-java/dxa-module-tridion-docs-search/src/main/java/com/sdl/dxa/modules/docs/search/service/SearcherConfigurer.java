@@ -187,7 +187,7 @@ public class SearcherConfigurer {
 
     @NotNull
     private String getRemoteStatusField(String separator) {
-        return getPublicationOnlineStatusField("dynamic", separator, "FISHDITADLVRREMOTESTATUS.lng.element");
+        return getPublicationOnlineStatusField("dynamicText", separator, "FISHDITADLVRREMOTESTATUS.lng.element");
     }
 
     private Criteria singleLanguageSearchQuery(SearchParameters searchParameters,

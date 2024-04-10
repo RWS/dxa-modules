@@ -19,7 +19,7 @@ public class SearcherConfigurerTest {
     @Test
     public void testBuildCriteria() throws SearchException {
         final String expected = "{\"type\":\"query\",\"op\":\"AND\",\"nodes\":[{\"type\":\"group\",\"keys\":" +
-            "[\"publicationId\",\"dynamic+FISHDITADLVRREMOTESTATUS.lng.element\",\"content+english\"]," +
+            "[\"publicationId\",\"dynamicText+FISHDITADLVRREMOTESTATUS.lng.element\",\"content+english\"]," +
             "\"values\":[\"123123\",\"VDITADLVRREMOTESTATUSONLINE\",\"some query\"],\"termTypes\":" +
             "[\"EXACT\",\"EXACT\",\"EXACT\"],\"boostValues\":[\"0.0\",\"0.0\",\"0.0\"]," +
             "\"types\":[\"INTEGER\",\"STRING\",\"STRING\"]}]}";
@@ -34,7 +34,7 @@ public class SearcherConfigurerTest {
     @Test
     public void testBuildCriteriaForExactSearch() throws SearchException {
         final String expected = "{\"type\":\"query\",\"op\":\"AND\",\"nodes\":[{\"type\":\"group\",\"keys\":" +
-                "[\"publicationId\",\"dynamic+FISHDITADLVRREMOTESTATUS.lng.element\",\"content+english\"]," +
+                "[\"publicationId\",\"dynamicText+FISHDITADLVRREMOTESTATUS.lng.element\",\"content+english\"]," +
                 "\"values\":[\"123123\",\"VDITADLVRREMOTESTATUSONLINE\",\"some query\"],\"termTypes\":" +
                 "[\"EXACT\",\"EXACT\",\"EXACT\"],\"boostValues\":[\"0.0\",\"0.0\",\"0.0\"],\"types\":" +
                 "[\"INTEGER\",\"STRING\",\"STRING\"]}]}";
@@ -49,7 +49,7 @@ public class SearcherConfigurerTest {
     @Test
     public void testBuildCriteriaFor5CharLanguage() throws SearchException {
         final String expected = "{\"type\":\"query\",\"op\":\"AND\",\"nodes\":[{\"type\":\"group\",\"keys\":" +
-                "[\"publicationId\",\"dynamic+FISHDITADLVRREMOTESTATUS.lng.element\",\"content+english\"]," +
+                "[\"publicationId\",\"dynamicText+FISHDITADLVRREMOTESTATUS.lng.element\",\"content+english\"]," +
                 "\"values\":[\"123123\",\"VDITADLVRREMOTESTATUSONLINE\",\"some query\"],\"termTypes\":" +
                 "[\"EXACT\",\"EXACT\",\"EXACT\"],\"boostValues\":[\"0.0\",\"0.0\",\"0.0\"],\"types\":" +
                 "[\"INTEGER\",\"STRING\",\"STRING\"]}]}";
@@ -66,7 +66,7 @@ public class SearcherConfigurerTest {
         final String expected = "{\"type\":\"query\",\"op\":\"AND\",\"nodes\":[{\"type\":\"query\"," +
                 "\"op\":\"AND\",\"nodes\":[{\"type\":\"field\",\"key\":\"publicationId\",\"value\":\"123123\"," +
                 "\"termType\":\"EXACT\",\"fieldType\":\"INTEGER\"},{\"type\":\"field\",\"key\":" +
-                "\"dynamic+FISHDITADLVRREMOTESTATUS.lng.element\",\"value\":\"VDITADLVRREMOTESTATUSONLINE\"," +
+                "\"dynamicText+FISHDITADLVRREMOTESTATUS.lng.element\",\"value\":\"VDITADLVRREMOTESTATUSONLINE\"," +
                 "\"fieldType\":\"STRING\"}]},{\"type\":\"query\",\"op\":\"OR\",\"nodes\":[{\"type\":\"field\"," +
                 "\"key\":\"content+cjk\",\"value\":\"some query\",\"fieldType\":\"STRING\"},{\"type\":\"field\"," +
                 "\"key\":\"content+japanese\",\"value\":\"some query\",\"fieldType\":\"STRING\"}]}]}";
@@ -84,7 +84,7 @@ public class SearcherConfigurerTest {
                 "\"AND\",\"nodes\":[{\"type\":\"field\",\"key\":\"publicationId\",\"value\":\"123123\"," +
                 "\"termType\":\"EXACT\",\"fieldType\":\"INTEGER\"},{\"type\":\"field\",\"key\":\"namespace\"," +
                 "\"value\":\"9987\",\"termType\":\"EXACT\",\"fieldType\":\"STRING\"}]},{\"type\":\"query\"," +
-                "\"op\":\"AND\",\"nodes\":[{\"type\":\"field\",\"key\":\"dynamic#FISHDITADLVRREMOTESTATUS.lng.element\"," +
+                "\"op\":\"AND\",\"nodes\":[{\"type\":\"field\",\"key\":\"dynamicText#FISHDITADLVRREMOTESTATUS.lng.element\"," +
                 "\"value\":\"VDITADLVRREMOTESTATUSONLINE\",\"fieldType\":\"STRING\"},{\"type\":\"query\"," +
                 "\"op\":\"OR\",\"nodes\":[{\"type\":\"field\",\"key\":\"content#cjk\",\"value\":\"notAQuery\"," +
                 "\"fieldType\":\"STRING\"},{\"type\":\"field\",\"key\":\"content#korean\",\"value\":\"notAQuery\"," +
@@ -102,7 +102,7 @@ public class SearcherConfigurerTest {
     @Test
     public void testBuildCriteriaForChinese() throws SearchException {
         final String expected = "{\"type\":\"query\",\"op\":\"AND\",\"nodes\":[{\"type\":\"field\",\"key\":" +
-                "\"dynamic+FISHDITADLVRREMOTESTATUS.lng.element\",\"value\":\"VDITADLVRREMOTESTATUSONLINE\"," +
+                "\"dynamicText+FISHDITADLVRREMOTESTATUS.lng.element\",\"value\":\"VDITADLVRREMOTESTATUSONLINE\"," +
                 "\"fieldType\":\"STRING\"},{\"type\":\"query\",\"op\":\"OR\",\"nodes\":[{\"type\":\"field\"," +
                 "\"key\":\"content+cjk\",\"value\":\"some query\",\"fieldType\":\"STRING\"},{\"type\":\"field\"," +
                 "\"key\":\"content+chinese\",\"value\":\"some query\",\"fieldType\":\"STRING\"}]}]}";
@@ -116,7 +116,7 @@ public class SearcherConfigurerTest {
     @Test
     public void testBuildCriteriaForKorean() throws SearchException {
         final String expected = "{\"type\":\"query\",\"op\":\"AND\",\"nodes\":[{\"type\":\"field\",\"key\":" +
-                "\"dynamic+FISHDITADLVRREMOTESTATUS.lng.element\",\"value\":\"VDITADLVRREMOTESTATUSONLINE\"," +
+                "\"dynamicText+FISHDITADLVRREMOTESTATUS.lng.element\",\"value\":\"VDITADLVRREMOTESTATUSONLINE\"," +
                 "\"fieldType\":\"STRING\"},{\"type\":\"query\",\"op\":\"OR\",\"nodes\":[{\"type\":\"field\"," +
                 "\"key\":\"content+cjk\",\"value\":\"some query\",\"fieldType\":\"STRING\"},{\"type\":\"field\"," +
                 "\"key\":\"content+korean\",\"value\":\"some query\",\"fieldType\":\"STRING\"}]}]}";
