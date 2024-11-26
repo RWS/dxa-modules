@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@sdl/icons": "1.1.0-16",
-    "async": "2.5.0",
+    "async": "2.6.4",
     "autoprefixer": "7.1.6",
     "babel-polyfill": "6.26.0",
     "browser-sync": "2.18.13",
